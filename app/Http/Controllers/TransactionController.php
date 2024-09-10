@@ -3,23 +3,43 @@
 namespace App\Http\Controllers;
 use App\services\TripayServices;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class TransactionController extends Controller
 {
-    public function show()
+    public function show($id)
     {
-         return view('transaction.show');
+        $tripay = new TripayServices();
+        $detailTransaction = $tripay->detailTransaction($id);
+
+
+
+        return view('transaction.show', compact('detailTransaction'));
     }
 
-    public function store(Request $request){
-        
+    public function store(Request $request)
+    {
+
+
 
         $tripay = new TripayServices();
 
-        $transactionRequest = $tripay->requestTransaction($request->channel, $request->karya, $request->donation);
-        
+        $transactionRequest = json_decode($tripay->requestTransaction($request->channel, $request->karya, $request->donation));
 
-        dd($transactionRequest);
+
+
+        if ($transactionRequest->success != true) {
+            Alert::error('Payment Failed', $transactionRequest->message);
+            return redirect()->back();
+        } else {
+
+            return redirect()->route('transaction.show', $transactionRequest->data->reference);
+
+        }
     }
+
+
+
 
 }

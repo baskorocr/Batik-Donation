@@ -12,28 +12,31 @@ class KaryaController extends Controller
 {
     public function index()
     {
-       
+
         $karyas = Karya::with('pemilik')->latest()->get();
 
 
-         return view('karya.index', compact('karyas'));
+        return view('karya.index', compact('karyas'));
     }
 
     public function show(Karya $karya)
     {
 
- 
-         return view('karya.show', compact('karya'));
+
+        return view('karya.show', compact('karya'));
     }
 
     public function checkout(Karya $karya)
     {
 
+        $karya->load('user');
+
+        // Now, you can access $karya->pemilik->name
         $tripay = new TripayServices();
         $channels = $tripay->channel();
 
 
 
-        return view('Karya.checkout', compact('karya','channels'));
+        return view('Karya.checkout', compact('karya', 'channels'));
     }
 }
