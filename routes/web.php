@@ -26,15 +26,16 @@ Route::get('karya/{karya}', [KaryaController::class, 'show'])->name('karya.show'
 Route::get('karya/{karya}/checkout', [KaryaController::class, 'checkout'])->name('karya.checkout');
 Route::get('transaction/{reference}', [TransactionController::class, 'show'])->name('transaction.show');
 Route::post('transaction/store', [TransactionController::class, 'store'])->name('transaction.store');
+Route::get('redirect', [TransactionController::class, 'redirect'])->name('redirect');
 
 
 
 
 Route::group(['middleware' => 'auth'], function () {
-   
- 
+
+
 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

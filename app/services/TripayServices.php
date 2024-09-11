@@ -68,6 +68,7 @@ class TripayServices
                     ],
                 ],
 
+                'return_url' => 'http://127.0.0.1:8000/redirect',
                 'expired_time' => (time() + (24 * 60 * 60)), // 24 hours
                 'signature' => hash_hmac('sha256', $merchantCode . $merchantRef . $donation, $privateKey)
             ];
