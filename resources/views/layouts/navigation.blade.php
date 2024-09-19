@@ -6,7 +6,8 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
+                        <img src="{{ asset('storage/cover_image/ico.png') }}" alt="Logo"
+                            style="width: 6rem; margin-top:2px">
                     </a>
                 </div>
 
@@ -14,6 +15,9 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('upload')" :active="request()->routeIs('upload')">
+                        {{ __('Upload Karya') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -39,9 +43,7 @@
 
                     <x-slot name="content">
                         <!-- Authentication -->
-                        <x-dropdown-link :href="route('home')">
-                            {{ __('Upload Karya') }}
-                        </x-dropdown-link>
+
 
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -80,7 +82,11 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('upload')" :active="request()->routeIs('upload')">
+                {{ __('Upload Karya') }}
+            </x-responsive-nav-link>
         </div>
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

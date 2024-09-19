@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Karya;
 
 use App\services\TripayServices;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class KaryaController extends Controller
 {
@@ -37,6 +40,42 @@ class KaryaController extends Controller
 
 
 
+
+
         return view('Karya.checkout', compact('karya', 'channels'));
+    }
+
+
+    public function upload()
+    {
+
+
+        return view('upload');
+    }
+
+    public function storeKarya(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'file' => 'required|file|max:2048' // Max size 2MB
+        ]);
+
+        if ($request->hasFile('file')) {
+            $filePath = $request->file('file')->store('cover_image', 'public');
+        }
+
+        Karya::create([
+            'title' => $request->input('title'),
+            'pemilik' => auth()->id(),
+            'description' => $request->input('description'),
+            'cover_image' => $filePath, // Store the file path
+        ]);
+
+        Alert::success('Upload is Success', 'have a wonderful day');
+
+        return redirect()->route('dashboard');
+
+
     }
 }

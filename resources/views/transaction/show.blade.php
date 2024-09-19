@@ -29,6 +29,13 @@
             <div class="bg-white p-6 rounded-lg shadow">
                 <h2 class="text-lg font-semibold text-gray-700 uppercase">Instructions</h2>
 
+                @if ($detailTransaction->payment_method === 'QRIS2')
+                    <div class="flex flex-col items-center justify-center">
+                        <img src="{{ $detailTransaction->qr_url }}" alt="Qris Code" width="220rem">
+                        <h3 class="text-lg text-gray-700 mt-4">Scan Qris Code</h3>
+                    </div>
+                @endif
+
                 {{-- Check if instructions are available --}}
                 @if (!empty($detailTransaction->instructions))
                     <div class="mt-4">
@@ -62,4 +69,35 @@
             </div>
         </div>
     </div>
+
+    {{-- Add AJAX Script --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Define the transaction ID
+
+
+            var transactionId = '{{ $detailTransaction->reference }}';
+            console.log(transactionId);
+            // Set interval to check payment status every 5 seconds
+            setInterval(function() {
+                $.ajax({
+                    url: '/cek/' + transactionId,
+                    method: 'GET',
+                    success: function(response) {
+                        // Check if the payment status is 'paid'
+                        if (response.status === 'paid') {
+                            // Redirect to the success page
+                            window.location.href = '/redirect/success';
+                        } else {
+                            console.log(response);
+                        }
+                    },
+                    error: function(error) {
+                        console.log("Error:", error);
+                    }
+                });
+            }, 5000); // 5 seconds interval
+        });
+    </script>
 @endsection

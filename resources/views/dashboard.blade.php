@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200 text-lg font-semibold text-primary">
-                    Last Transaction
+                    Your Works (Karya)
                 </div>
                 <div class="flex flex-col">
                     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -18,62 +18,46 @@
                                 <table class="min-w-full divide-y divide-gray-200">
                                     <thead class="bg-gray-50">
                                         <tr>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Name
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Title
                                             </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Book
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Description
                                             </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Amount
-                                            </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Status
-                                            </th>
-                                            <th scope="col" class="relative px-6 py-3">
-                                                <span class="sr-only">Edit</span>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                File
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    <div class="flex-shrink-0 h-10 w-10">
-                                                        <img class="h-10 w-10 rounded-full" src="{{ "https://picsum.photos/" . 100 }}" alt="">
+                                        @foreach ($karyas as $karya)
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="text-sm font-medium text-gray-900">{{ $karya->title }}
                                                     </div>
-                                                    <div class="ml-4">
-                                                        <div class="text-sm font-medium text-gray-900">
-                                                            Jane Cooper
-                                                        </div>
-                                                        <div class="text-sm text-gray-500">
-                                                            jane.cooper@example.com
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-900">Regional Paradigm Technician</div>
-                                                <div class="text-sm text-gray-500">Optimization</div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                Rp. 300.000
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                    Paid
-                                                </span>
-                                            </td>
-                                        </tr>
-
-                                        <!-- More people... -->
+                                                </td>
+                                                <td class="px-6 py-4 max-w-xs whitespace-normal break-words">
+                                                    <div class="text-sm text-gray-500">{{ $karya->description }}</div>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <img src="{{ asset('storage/' . $karya->cover_image) }}"
+                                                        alt="Karya Image" class="h-20 w-20 object-cover rounded">
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
+                                @if ($karyas->isEmpty())
+                                    <div class="p-4 text-center text-gray-500">No works uploaded yet.</div>
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
-                </div>
             </div>
         </div>
-    </x-app-layout>
+    </div>
+</x-app-layout>

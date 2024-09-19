@@ -21,10 +21,9 @@
                     alt="">
                 <div class="mt-3">
                     <p class="font-semibold text-primary">{{ \Str::limit($karya->title, 16) }}</p>
-                    <p class="text-xs text-gray-400 uppercase">{{ $karya->description }}</p>
+                    <p class="text-xs text-gray-400 uppercase">{{ \Str::limit($karya->description, 16) }}</p>
                     <p class="text-xs text-gray-400 uppercase">Created By {{ $karya->user->name }}</p>
                 </div>
-
             </a>
         @endforeach
     </div>

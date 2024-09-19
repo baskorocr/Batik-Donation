@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\callbackController;
 use App\Http\Controllers\KaryaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -26,7 +27,11 @@ Route::get('karya/{karya}', [KaryaController::class, 'show'])->name('karya.show'
 Route::get('karya/{karya}/checkout', [KaryaController::class, 'checkout'])->name('karya.checkout');
 Route::get('transaction/{reference}', [TransactionController::class, 'show'])->name('transaction.show');
 Route::post('transaction/store', [TransactionController::class, 'store'])->name('transaction.store');
-Route::get('redirect', [TransactionController::class, 'redirect'])->name('redirect');
+Route::get('redirect/{message}', [TransactionController::class, 'redirect'])->name('redirect');
+Route::post('callback', [callbackController::class, 'handle'])->name('callback');
+Route::get('cek/{id}', [callbackController::class, 'cekPayment']);
+
+
 
 
 
@@ -36,6 +41,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('upload', [KaryaController::class, 'upload'])->name('upload');
+    Route::post('storeKarya', [KaryaController::class, 'storeKarya'])->name('store.karya');
 });
 
 require __DIR__ . '/auth.php';
