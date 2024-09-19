@@ -9,6 +9,7 @@ class HomeController extends Controller
     public function index()
     {
   
+      
         $karyas = Karya::with('user')->latest()->get();
 
         return view('home', compact('karyas'));
