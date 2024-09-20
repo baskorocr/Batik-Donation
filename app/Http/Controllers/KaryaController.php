@@ -38,11 +38,13 @@ class KaryaController extends Controller
         $tripay = new TripayServices();
         $channels = $tripay->channel();
 
+   
 
 
 
 
-        return view('Karya.checkout', compact('karya', 'channels'));
+
+        return view('karya.checkout', compact('karya', 'channels'));
     }
 
 
@@ -72,7 +74,7 @@ class KaryaController extends Controller
             'cover_image' => $filePath, // Store the file path
         ]);
 
-        Alert::success('Upload is Success', 'have a wonderful day');
+        Alert::success('Upload is Success', 'Good luck in the painting batik competition');
 
         return redirect()->route('dashboard');
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\services\TripayServices;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
-use App\Models\transaction;
+use App\Models\Transaction;
 
 
 class TransactionController extends Controller
@@ -40,7 +40,7 @@ class TransactionController extends Controller
     public function createTransaction($karya, $total, $reference, $merchant)
     {
 
-        transaction::create([
+        Transaction::create([
             'karya_id' => (int) $karya,
             'total_amount' => $total,
             'reference' => $reference,
@@ -53,9 +53,11 @@ class TransactionController extends Controller
     public function redirect($message)
     {
         if ($message == "success") {
-            Alert::success('Payment status is Paid', 'Good luck in the painting batik competition');
+            Alert::success('Payment status is Paid', 'Thank you, have a nice day');
 
         }
+        
+      
 
         return redirect()->route('home');
     }

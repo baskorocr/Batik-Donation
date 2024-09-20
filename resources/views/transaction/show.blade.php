@@ -82,13 +82,13 @@
             // Set interval to check payment status every 5 seconds
             setInterval(function() {
                 $.ajax({
-                    url: '/cek/' + transactionId,
+                    url: '/batik/cek/' + transactionId,
                     method: 'GET',
                     success: function(response) {
                         // Check if the payment status is 'paid'
                         if (response.status === 'paid') {
                             // Redirect to the success page
-                            window.location.href = '/redirect/success';
+                            window.location.href = '/batik/redirect/success';
                         } else {
                             console.log(response);
                         }

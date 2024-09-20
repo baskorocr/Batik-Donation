@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-use App\Models\transaction;
+use App\Models\Transaction;
 
 class callbackController extends Controller
 {
@@ -42,7 +42,7 @@ class callbackController extends Controller
 
 
         if ($data->is_closed_payment === 1) {
-            $Transaction = transaction::where('reference', $tripayReference)
+            $Transaction = Transaction::where('reference', $tripayReference)
                 ->where('status', '=', 'UNPAID')
                 ->first();
 
@@ -83,7 +83,7 @@ class callbackController extends Controller
 
     public function cekPayment($id)
     {
-        $data = transaction::where('reference', $id)->first();
+        $data = Transaction::where('reference', $id)->first();
         $status = 'unpaid';
         if ($data->status == 'paid') {
             $status = $data->status;
