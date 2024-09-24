@@ -21,4 +21,9 @@ class Karya extends Model
     {
         return $this->belongsTo(User::class, 'pemilik'); // 'pemilik' adalah foreign key yang menunjuk ke kolom 'id' pada tabel users
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

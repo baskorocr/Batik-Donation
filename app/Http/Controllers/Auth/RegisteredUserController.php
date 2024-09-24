@@ -18,6 +18,10 @@ class RegisteredUserController extends Controller
      *
      * @return \Illuminate\View\View
      */
+
+     public function __construct(){
+          abort(500);
+     }
     public function create()
     {
         return view('auth.register');

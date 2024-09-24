@@ -30,6 +30,10 @@
                                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 File
                                             </th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Total Amount
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
@@ -45,6 +49,11 @@
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     <img src="{{ asset('storage/' . $karya->cover_image) }}"
                                                         alt="Karya Image" class="h-20 w-20 object-cover rounded">
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="text-sm font-medium text-gray-900">
+                                                        {{ $karya->transactions_sum_total_amount ?? '0' }}
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach

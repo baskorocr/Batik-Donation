@@ -2,7 +2,7 @@
     <a href="{{ route('home') }}">
         <img src="{{ asset('storage/cover_image/ico.png') }}" style="width: 6.5rem;" alt="">
     </a>
-    <div class="flex space-x-3">
+    <!-- <div class="flex space-x-3">
         @guest
             <div class="flex space-x-3">
 
@@ -12,5 +12,5 @@
             </div>
         @endguest
 
-    </div>
+    </div> -->
 </div>
