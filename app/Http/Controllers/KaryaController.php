@@ -38,12 +38,6 @@ class KaryaController extends Controller
         $tripay = new TripayServices();
         $channels = $tripay->channel();
 
-   
-
-
-
-
-
         return view('karya.checkout', compact('karya', 'channels'));
     }
 
@@ -70,7 +64,7 @@ class KaryaController extends Controller
         Karya::create([
             'title' => $request->input('title'),
             'pemilik' => auth()->id(),
-            'description' => $request->input('description'),
+            'description' => $request->input('description', ''),
             'cover_image' => $filePath, // Store the file path
         ]);
 
