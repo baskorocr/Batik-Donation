@@ -34,6 +34,10 @@
                                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Total Amount
                                             </th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Actions
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
@@ -44,7 +48,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="px-6 py-4 max-w-xs whitespace-normal break-words">
-                                                    <div class="text-sm text-gray-500">{{ $karya->description }}</div>
+                                                    <div class="text-sm font-medium text-gray-900">{{ $karya->description }}</div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     <img src="{{ asset('storage/' . $karya->cover_image) }}"
@@ -55,6 +59,20 @@
                                                         {{ $karya->transactions_sum_total_amount ?? '0' }}
                                                     </div>
                                                 </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="flex space-x-2">
+                                                        <!-- Edit Button -->
+                                                        <a href="{{ route('karya.edit', $karya->id) }}" class="bg-blue-500 text-white p-2 rounded">Edit</a>
+                                                        
+                                                        <!-- Delete Button -->
+                                                        <form action="{{ route('karya.destroy', $karya->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="bg-red-500 text-white p-2 rounded">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+
                                             </tr>
                                         @endforeach
                                     </tbody>

@@ -6,7 +6,7 @@
             class="mt-6 text-sm text-primary hover:text-black transition duration-300 ease-in-out inline-block">
             &lt; Kembali
         </a>
-        <h2 class="text-primary font-medium text-lg mt-3">Choose your payment method</h2>
+        <h2 class="text-primary font-medium text-lg mt-3 font-sans">Choose your payment method</h2>
 
         <!-- Responsive flex layout for payment methods and image -->
         <div class="flex flex-col md:flex-row gap-6 mt-6">
@@ -21,7 +21,7 @@
                                 <div class="bg-white p-5 rounded-md shadow-soft flex items-center justify-center h-full">
                                     <div class="text-center">
                                         <img src="{{ $channel->icon_url }}" class="w-full" alt="{{ $channel->name }}">
-                                        <p class="mt-3 text-xs text-gray-600">{{ $channel->name }}</p>
+                                        <p class="mt-3 text-xs text-gray-600 font-sans">{{ $channel->name }}</p>
 
                                     </div>
                                 </div>
@@ -37,10 +37,10 @@
                     alt="{{ $karya->title }}">
 
                 <div class="p-4">
-                    <h2 class="mt-2 text-primary text-lg font-semibold">{{ $karya->title }}</h2>
-                    <p class="mt-3 text-primary">Created By: {{ $karya->user->name }}</p>
+                    <h2 class="mt-2 text-primary text-lg font-semibold font-sans">{{ $karya->title }}</h2>
+                   
                     <!-- Ensure pemilik relationship is loaded -->
-                    <p class="mt-2 text-primary text-sm">{{ $karya->description }}</p>
+                    <p class="mt-2 text-primary text-sm font-sans break-words">{{ $karya->description }}</p>
                 </div>
             </div>
 
@@ -54,7 +54,7 @@
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                     <!-- Modal header -->
                     <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white font-sans">
                             Open Payment Donation
                         </h3>
                         <button type="button"
@@ -70,11 +70,11 @@
                     </div>
                     <!-- Modal body -->
                     <div class="p-4 md:p-5">
-                        <form class="space-y-4" method="POST" action="{{ route('transaction.store') }}">
+                        <form  class="space-y-4" id="paymentForm" method="POST" action="{{ route('transaction.store') }}">
                             @csrf
                             <div>
                                 <label for="karya"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Karya
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-sans">Karya
                                     dipilih</label>
                                 <input type="text" readonly name="karya" id="karya" value="{{ $karya->title }}"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -83,7 +83,7 @@
                             </div>
                             <div>
                                 <label for="channel"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Payment
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-sans">Payment
                                     Channel</label>
                                 <input type="text" readonly name="channel" id="channel"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -91,13 +91,13 @@
                             </div>
                             <div>
                                 <label for="donation"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Masukan
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-sans">Masukan
                                     Jumlah</label>
                                 <input type="number" name="donation" id="donation" placeholder="10000"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                     required />
                             </div>
-                            <button type="submit"
+                            <button type="submit" id="paymentButton"
                                 class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Payment</button>
                         </form>
                     </div>
@@ -118,6 +118,25 @@
                     channelInput.value = channelName;
                 });
             });
+        });
+    </script>
+
+    <script>
+        var uploadbutton = document.getElementById('paymentButton');
+        var form = document.getElementById('paymentForm'); // Asumsikan form memiliki id 'myForm'
+        uploadbutton.addEventListener('click', function(event) {
+            event.preventDefault(); // Mencegah submit default
+            // Validasi form
+            if (form.checkValidity()) {
+                // Jika semua field terisi
+                setTimeout(function () {
+                    event.target.disabled = true;
+                    event.target.textContent = 'Payment'; 
+                    console.log("payment");
+                }, 0);
+                // Submit form secara manual
+                form.submit(); 
+            } 
         });
     </script>
 @endsection

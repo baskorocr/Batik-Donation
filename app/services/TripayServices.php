@@ -27,6 +27,7 @@ class TripayServices
             $response = curl_exec($curl);
             $error = curl_error($curl);
        
+     
 
             curl_close($curl);
 

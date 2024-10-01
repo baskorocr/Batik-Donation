@@ -48,7 +48,7 @@
         </div>
         <!-- Creator Info -->
         <div class="flex items-center justify-between">
-            <p class="text-primary text-lg">Created By {{ $karya->user->name }}</p>
+            <p class="text-primary text-lg">Created By {{ $karya->pemilik }}</p>
         </div>
         <!-- Description -->
         <div class="mt-3 text-gray-600 text-justify">

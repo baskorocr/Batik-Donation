@@ -6,13 +6,16 @@ module.exports = {
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
+        './resources/**/*.blade.php',  // broader to include all Blade views
+        './resources/**/*.js',         // include Vue or other JS files
+        './resources/**/*.vue',        // if you're using Vu
     ],
 
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Nunito", ...defaultTheme.fontFamily.sans],
-                poppins: ["poppins"],
+                sans: ['Open Sans', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'], // Set Open Sans as the first option
+                poppins: ["Poppins"],
             },
             colors: {
                 primary: "#222439",

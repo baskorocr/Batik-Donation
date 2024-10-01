@@ -15,7 +15,7 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('karya_id')->constrained();
+            $table->foreignId('karya_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->integer('total_amount');
             $table->string('reference');
             $table->string("merchant_reference");

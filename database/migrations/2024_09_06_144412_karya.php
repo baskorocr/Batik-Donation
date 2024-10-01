@@ -15,14 +15,14 @@ class Karya extends Migration
     {
         Schema::create('karyas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pemilik');
+            $table->string('pemilik');
             $table->string('title');
             $table->string('description');
             $table->string('cover_image');
             $table->timestamps();
         
             // Update the table reference to 'users' instead of 'user'
-            $table->foreign('pemilik')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+           
         });
     }
 

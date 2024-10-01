@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::get('/', function (){
+//     return view('batiklanding');
+// })->name('home');
 
 Route::get('karyas/{type}', [KaryaController::class, 'index'])->name('karyas');
 Route::get('karya/{karya}', [KaryaController::class, 'show'])->name('karya.show');
@@ -39,13 +42,16 @@ Route::get('cek/{id}', [callbackController::class, 'cekPayment']);
 
 
 
+
+
 Route::group(['middleware' => 'auth'], function () {
 
-
-
+    Route::get('/karya/{id}/edit', [KaryaController::class, 'edit'])->name('karya.edit');
+    Route::put('/karya/{id}', [KaryaController::class, 'update'])->name('karya.update');
+    Route::delete('/karya/{id}', [KaryaController::class, 'destroy'])->name('karya.destroy');
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('upload', [KaryaController::class, 'upload'])->name('upload');
-    Route::post('storeKarya', [KaryaController::class, 'storeKarya'])->name('store.karya');
+    Route::post('storeKarya', [KaryaController::class, 'storeKarya'])->name('stores.karya');
 });
 
 require __DIR__ . '/auth.php';
