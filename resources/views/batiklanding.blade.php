@@ -72,8 +72,9 @@ p {
 <body>
     <div class="container">
         <div class="content">
-            <h1>Website Dharma Batik Week Competition</h1>
-            <p>Akan dibuka pada Tanggal 1 Oktober 2024</p>
+            <h1>Thanks, for participant!</h1>
+            <p>For your donation, we will distribute it to the Bakti Dharma Polimetal Foundation.</p>
+            <p>See you next event :)</p>
         </div>
     </div>
 </body>
